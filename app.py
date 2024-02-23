@@ -1,18 +1,17 @@
 from flask import Flask, request, render_template
+from prometheus_client import start_http_server, Summary
 import requests
 
 app = Flask(__name__)
-
+search_latency = Summary('search_latency_seconds', 'latencyy of /search endpoint in seconds')
 
 @app.route("/")
 def home():
-
     return render_template("home.html")
 
-
 @app.route("/search", methods=["POST"])
+@search_latency.time()
 def search():
-
     # Get the search query
     query = request.form["q"]
 
@@ -35,5 +34,4 @@ def search():
 
     # If a location is NOT found, return the error page
     else:
-
         return render_template("fail.html")

@@ -35,3 +35,13 @@ def search():
     # If a location is NOT found, return the error page
     else:
         return render_template("fail.html")
+
+# metrics
+@app.route('/metrics')
+def metrics():
+    return generate_latest(search_latency)
+
+if __name__ == "__main__":
+    #start prometheus metrics server
+    start_http_server(8080)
+    app.run(debug=True)

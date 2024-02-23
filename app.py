@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from prometheus_client import start_http_server, Summary
+from prometheus_client import Summary, generate_latest
 import requests
 
 app = Flask(__name__)
@@ -40,8 +40,3 @@ def search():
 @app.route('/metrics')
 def metrics():
     return generate_latest(search_latency)
-
-if __name__ == "__main__":
-    #start prometheus metrics server
-    start_http_server(8080)
-    app.run(debug=True)

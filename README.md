@@ -1,4 +1,4 @@
-# Flask World Clock
+# Flask World Clock (By Iheb Riahi)
 
 A world clock application built to demonstrate logging in Flask.
 
